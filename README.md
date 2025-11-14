@@ -107,7 +107,7 @@ L’Afrique fait face à de nombreux défis dans le secteur de la santé :
 | DJOSSOU Light | Data Scientist | Préparation des datasets, entraînement du modèle (Custom Training), intégration et deploiement |
 | DOH Ben |Développeur du ChatBot  | Entraine et deploie le modèle du chatbot |
 | KOUMI Rejoice | Développeur Full-Stack | Application mobile + Dashboard web |
-| Membre 4 | Développeur Backend | Conception des APIs, gestion des données, intégration cloud |
+| SEGUE Freeman | Développeur Backend | Conception des APIs, gestion des données, intégration cloud |
 
 ---
 
