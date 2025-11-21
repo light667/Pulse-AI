@@ -174,7 +174,7 @@ Il fonctionne grâce à :
 ## 📞 Contacts
 
 **Projet :** Pulse AI  
-**Email :** nethaniahdjossou@gmail.com  
+**Email :** lightdjossou@hotmail.com  
 **Pays :** Togo 🇹🇬  
 
 ---
