@@ -2,101 +2,132 @@
 
 ## 🌍 Aperçu général
 
-**Pulse AI** est une plateforme intelligente basée sur l’intelligence artificielle, conçue pour améliorer l’accès aux soins médicaux en Afrique.  
-Notre objectif est de **rendre la santé plus accessible, connectée et efficace**, surtout dans les zones rurales.  
-Le système combine **diagnostic intelligent**, **gestion en temps réel des hôpitaux**, **soutien à la santé mentale** et **traçabilité des médicaments** au sein d’un même écosystème.
+**Pulse AI** est une plateforme intelligente conçue pour améliorer l’accès aux soins en Afrique grâce à l’intelligence artificielle, aux données hospitalières et à une architecture numérique adaptée au contexte local.  
+Notre mission est de **rendre la santé accessible, connectée et efficace**, particulièrement dans les zones rurales.
+
+Le système regroupe :  
+- un **diagnostic intelligent** basé sur RAG + modèles open-source,  
+- une **gestion intelligente des hôpitaux (SmartHosp)**,  
+- un **chatbot de bien-être pour les jeunes (MindCare)**,  
+- une **future fonctionnalité de traçabilité des médicaments (MedScan)**.
 
 ---
 
 ## 🚨 Problématique
 
-L’Afrique fait face à de nombreux défis dans le secteur de la santé :
+L’Afrique fait face à plusieurs défis majeurs dans le domaine de la santé :
 
-- 🌾 Accès limité à des soins médicaux qualifiés dans les zones rurales,  
-- 🏥 Surpopulation hospitalière et mauvaise répartition des ressources,  
-- 💊 Circulation de faux médicaments et manque d’informations sur les traitements,  
-- 😔 Montée du stress et de la dépression chez les jeunes sans accompagnement adapté.
+- 🌾 Accès limité aux soins dans les zones rurales,  
+- 🏥 Surpopulation hospitalière et manque de gestion en temps réel,  
+- 💊 Circulation de faux médicaments,  
+- 😔 Stress et détresse psychologique croissants chez les jeunes,  
+- 📍 Difficulté à trouver le bon hôpital selon les services réellement disponibles.
 
 ---
 
 ## 💡 Notre solution
 
-**Pulse AI** propose une approche complète et intégrée à travers quatre modules clés :
+Pulse AI propose quatre modules qui fonctionnent ensemble :
 
-### 🩺 1. Diagnostic Intelligent
-- L’utilisateur saisit ses **symptômes (texte, voix ou image)**.  
-- L’IA, entraînée à partir de données médicales, **propose un diagnostic préliminaire** et des **recommandations de traitement de base**.  
-- Ensuite, elle suggère des **centres médicaux ou hôpitaux à proximité** selon :
-  - le taux d’occupation,  
-  - le nombre de lits et médecins disponibles,  
-  - la distance et la spécialisation.  
-- Basé sur **Vertex AI AutoML** et **Google Maps API**.
+---
 
-### 🏥 2. Gestion intelligente des hôpitaux
-- Chaque hôpital dispose d’un **tableau de bord web** pour :
-  - enregistrer le nombre de lits disponibles,  
-  - indiquer les médecins présents et leurs horaires,  
-  - signaler l’état des stocks de médicaments.  
-- Ces données sont synchronisées avec la plateforme centrale pour **optimiser la répartition des patients et des ressources**.  
-- Les administrateurs hospitaliers accèdent aussi à des **statistiques et rapports analytiques**.
+### 🩺 1. Diagnostic Intelligent (RAG + modèles biomédicaux open-source)
 
-### 💬 3. MindCare — Chatbot de santé mentale
-- Un **assistant conversationnel** qui discute avec les jeunes, détecte les signes de stress ou de mal-être et propose :
-  - des conseils personnalisés,  
-  - des activités relaxantes,  
-  - ou une orientation vers un professionnel.  
-- Propulsé par **Gemini API (Vertex AI)** pour offrir des échanges naturels et empathiques.
+- Entrée utilisateur : **symptômes en texte ou voix**  
+- Analyse via :
+  - un modèle biomédical open-source HuggingFace,  
+  - un **RAG médical** contenant des documents de symptômes/maladies.  
+- L’IA génère :
+  - un **diagnostic préliminaire**,  
+  - un niveau de gravité,  
+  - des premiers conseils.  
 
-### 💊 4. MedScan (fonctionnalité à venir)
-- Permettra de **scanner un médicament** (code-barres, texte, photo) pour :
-  - vérifier son authenticité,  
-  - connaître sa composition et ses effets.  
-- Basée sur **GCP Vision API** et une base de données de produits certifiés.
+➡️ L’utilisateur peut ensuite demander une **liste d'hôpitaux adaptés**, même sans diagnostic, uniquement selon les services requis.
+
+---
+
+### 🏥 2. SmartHosp — Gestion intelligente des hôpitaux
+
+Chaque hôpital dispose d’un **Dashboard web** pour :
+
+- s’inscrire et présenter ses services médicaux disponibles,  
+- déclarer :
+  - le nombre de lits restants,  
+  - les médecins présents,  
+  - les heures de disponibilité,  
+- mettre à jour les capacités en temps réel.
+
+Le système calcule ensuite automatiquement un :
+
+- **score d’hôpital**,  
+- classement par distance (via OpenStreetMap),  
+- classement par services compatibles.
+
+---
+
+### 💬 3. MindCare — Chatbot de bien-être (RAG)
+
+MindCare accompagne les jeunes en leur offrant :
+
+- conseils anti-stress,  
+- méthodes de concentration,  
+- soutien à la discipline scolaire,  
+- exercices de respiration et relaxation,  
+- légère détection de détresse émotionnelle.
+
+Il fonctionne grâce à :
+
+- un modèle open-source,  
+- un RAG basé sur psychologie légère, motivation, bien-être.
+
+---
+
+### 💊 4. MedScan (module futur)
+
+- Scan d’un médicament (photo, texte).  
+- Vérification de l’authenticité via une base structurée.  
+- Affichage de la composition, effets et risques.
 
 ---
 
 ## 🧠 Architecture technique
 
 | Composant | Description | Technologies |
-|------------|--------------|---------------|
-| **Application mobile** | Application Flutter pour les patients (diagnostic, MindCare, MedScan). | Flutter, Dart |
-| **Tableau de bord web** | Interface de gestion pour les hôpitaux. | HTML, CSS & Javascript|
-| **Backend / API** | Point central de communication entre l’application, le tableau de bord et les modèles IA. | FastAPI (Python) |
-| **Infrastructure IA** | Entraînement, hébergement et déploiement des modèles. | Python(scikitlearn, TensorFlow, Numpy, Pandas,Seaborn ...), Google Vertex AI (Custom Training, Gemini, Vision) |
-| **Base de données** | Gestion des utilisateurs, hôpitaux, diagnostics et logs. | PostgreSQL / Firestore |
-| **Hébergement** | Déploiement des APIs et dashboards. | Google Cloud Run, Firebase |
+|----------|-------------|--------------|
+| **Application mobile** | Interface du patient : diagnostic, chatbot, hôpitaux, MedScan. | Flutter, Dart, OpenStreetMap |
+| **Dashboard web** | Module pour hôpitaux : services, lits, médecins. | HTML, CSS, JavaScript |
+| **Backend / API** | Diagnostic, recommandation, chatbot, gestion hôpitaux. | FastAPI (Python) |
+| **IA / ML** | RAG médical & bien-être, embeddings, modèles open-source. | HuggingFace, FAISS, Scikit-Learn |
+| **Base de données** | Stockage du système. | PostgreSQL |
+| **Déploiement** | Stack containerisée. | Docker + VPS |
+| **Cartographie** | Distance & géolocalisation. | OpenStreetMap |
+| **Collaboration** | Documentation & gestion d’équipe. | GitHub, Notion |
 
 ---
 
 ## 🔁 Fonctionnement global
 
-1. **Entrée utilisateur**  
-   Le patient saisit ses symptômes ou pose une question via la voix ou le chat.
-2. **Traitement IA**  
-   Les données sont envoyées à **Vertex AI** pour analyse (modèle Custom Training).  
-3. **Recommandation médicale**  
-   L’application affiche le diagnostic estimé et propose un hôpital disponible.  
-4. **Synchronisation hospitalière**  
-   Les hôpitaux mettent à jour leurs données (lits, médecins, horaires).  
-5. **Support mental**  
-   L’utilisateur peut discuter avec **MindCare**, le chatbot de santé mentale.  
-6. **Traçabilité médicamenteuse (future étape)**  
-   Le module MedScan permettra la vérification et l’éducation médicale.
+1. L'utilisateur décrit ses symptômes.
+2. Le backend active un modèle biomédical + RAG médical.
+3. Pulse AI génère un diagnostic préliminaire.
+4. SmartHosp recommande les hôpitaux selon services → distance → capacité.
+5. Les hôpitaux mettent à jour leurs données via Dashboard.
+6. MindCare accompagne l’utilisateur sur le plan mental.
+7. MedScan permettra bientôt la vérification des médicaments.
 
 ---
 
 ## 🧰 Stack technologique
 
-| Catégorie | Outils / Technologies |
-|------------|----------------------|
-| **Frontend** | Flutter (mobile), HTML, CSS & Javascript(web) |
-| **Backend** | FastAPI / Node.js |
-| **IA & ML** | Vertex AI Custom Training, Gemini API, Vision API |
-| **Base de données** | PostgreSQL, Firestore |
-| **Cloud** | Google Cloud Platform (Cloud Run, Vertex AI, Storage) |
-| **API externes** | Google Maps API |
-| **Collaboration** | GitHub, Notion, Google Workspace |
-| **Design / Maquettes** | Figma, Material Design |
+| Catégorie | Technologies |
+|-----------|--------------|
+| **Mobile** | Flutter, Dart |
+| **Backend** | FastAPI |
+| **IA** | Transformers, FAISS, Scikit-Learn |
+| **Data** | Pandas, NumPy |
+| **DB** | PostgreSQL |
+| **Déploiement** | Docker, Nginx, VPS |
+| **Map** | OpenStreetMap |
 
 ---
 
@@ -104,47 +135,47 @@ L’Afrique fait face à de nombreux défis dans le secteur de la santé :
 
 | Membre | Rôle | Responsabilités |
 |--------|------|------------------|
-| DJOSSOU Light | Data Scientist | Préparation des datasets, entraînement du modèle (Custom Training), intégration et deploiement |
-| DOH Ben |Développeur du ChatBot  | Entraine et deploie le modèle du chatbot |
-| KOUMI Rejoice | Développeur Full-Stack | Application mobile + Dashboard web |
-| SEGUE Freeman | Développeur Backend | Conception des APIs, gestion des données, intégration cloud |
+| **DJOSSOU Light** | Data Science & Dev web| Diagnostic RAG, recommandation, Dashboard hôpitaux |
+| **DOH Ben** | Dev Chatbot | Dév MindCare RAG, modèle open-source |
+| **KOUMI Rejoice** | Dev Mobile | App Flutter, OpenStreetMap, Dashboard web |
+| **SEGUE Freeman** | Backend Engineering | API FastAPI, PostgreSQL, intégration IA |
 
 ---
 
 ## 📊 Impact attendu
 
-- 🏥 **Optimisation des ressources hospitalières** grâce à la data en temps réel.  
-- 🌾 **Accès facilité à la santé** dans les zones rurales et isolées.  
-- 💊 **Réduction des faux médicaments** et amélioration de la confiance médicale.  
-- 💬 **Soutien psychologique accessible** pour les jeunes Africains.  
+- 🏥 Optimisation des ressources hospitalières,  
+- 🌾 Accessibilité accrue aux zones rurales,  
+- 💊 Réduction des faux médicaments,  
+- 💬 Amélioration du bien-être mental des jeunes,  
+- 🧭 Orientation médicale plus précise et rapide.
 
 ---
 
 ## 🔮 Vision future
 
-- Intégration de **capteurs IoT** pour le suivi des patients à distance.  
-- Extension du diagnostic aux **maladies tropicales locales**.  
-- Ajout du **multilinguisme** (français, éwé, hausa, anglais).  
-- Partenariats avec les **ministères de la santé** et hôpitaux publics.  
-- Utilisation de la **data pour la recherche épidémiologique**.
+- Support vocal complet,  
+- Diagnostic pour maladies tropicales,  
+- Multilinguisme local (éwé, kabyè…),  
+- IoT pour suivi de patients à distance,  
+- Partenariats avec centres hospitaliers publics.
 
 ---
 
 ## ⚖️ Éthique et protection des données
 
-- Conformité aux normes **RGPD** et respect de la vie privée.  
-- Données anonymisées et stockées de façon sécurisée.  
-- L’IA ne remplace pas les médecins : elle **assiste** et oriente.  
-- Promotion d’une **IA éthique, inclusive et transparente** pour l’Afrique.
+- Données encryptées, anonymisées,  
+- Pas de partage à des tiers,  
+- Respect complet de l’éthique médicale,  
+- L’IA ne remplace jamais un médecin.
 
 ---
 
 ## 📞 Contacts
 
-**Nom du projet :** Pulse AI  
-**Pays :** Togo 🇹🇬  
+**Projet :** Pulse AI  
 **Email :** nethaniahdjossou@gmail.com  
-
+**Pays :** Togo 🇹🇬  
 
 ---
 
